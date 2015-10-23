@@ -1,37 +1,83 @@
 #include <iostream>
 #include <string>
 
+
 int main(){
 
-  //This is a comment
-  /* This is a multiline
-     comment */
 
-  std::cout<< "Hello World! \n";
 
-  int a {3};
-  a = 4;
-  std::cout<< 4 << std::endl;
+  std::string msg{};
+  //read in characters
+  char in_char{'x'};
 
-  double b {7.935235325235235};
+  /* Allow user to enter input characters, Press CTRL+D to exit */
 
-  std::cout << b*a << std::endl;
-
-  auto chris_everett_smells {true};
+  std::cout<< "Enter input characters, when finished press CTRL + D" << std::endl;
   
-  double blah {8.0};
-  int foo {3};
-  int hasselhoff {8};
+  
+  while(std::cin >> in_char){
 
-  std::string whaddaya_say {"Booyacakashackalalala"};
 
-  std::cout << "Good ? : " << blah / foo << std::endl;
-  std::cout << "Not right ? : " << hasselhoff / foo << std::endl;
+    /* Check if character is an alphabetic 
+       letter, force it to be uppercase */
+    
+    if(isalpha(in_char)){
+      
+      msg += toupper(in_char);
+    }   
 
-  auto my_char = whaddaya_say[3];
 
-  std::cout << "My string : "<< whaddaya_say << std::endl;
-  std::cout << "My char from string : " << my_char << std::endl;
+    
+    /* Check particular cases when entered characters
+       are numbers. Then append the number as a word
+       to the msg string */
 
+   
+    switch(in_char) {
+
+    case '0':
+      msg += "ZERO";
+	break;
+
+    case '1':
+      msg += "ONE";
+	break;
+
+    case '2':
+      msg += "TWO";
+	break;
+	
+    case '3':
+      msg += "THREE";
+	break;
+
+    case '4':
+      msg += "FOUR";
+      break;
+
+    case '5':
+      msg += "FIVE";
+      break;
+
+    case '6':
+      msg += "SIX";
+      break;
+
+    case '7':
+    msg += "SEVEN";
+    break;
+
+    case '8':
+      msg += "EIGHT";
+      break;
+
+    case '9':
+      msg += "NINE";
+      break;
+    }
+
+  }
+
+  std::cout<< msg << std::endl;
   
 }
