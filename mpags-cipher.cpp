@@ -1,113 +1,62 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 
-std::string transformChar(char input){
-  /* Function which transforms the input character into the correct type
+//ichange
+// Our program headers
+#include "TransformChar.hpp"
+#include "CommandLineHelpers.hpp"
 
-     input - character which is to be transformed
+void get_in_file(std::string location, std::string& input, bool& ok_read){
 
-     returns the transformed character */
-
-  std::string output{};
+  std::ifstream in_file {location};
+  if (in_file.good()) { ok_read = true;
+    in_file >> input;}
   
-  if(isalpha(input)){
-    output = toupper(input);
-    
-    }   
-    
-    /* Check particular cases when entered characters
-       are numbers. Then append the number as a word
-       to the msg string */
-   
-    switch(input) {
-    case '0':
-      output= "ZERO";
-	break;
-
-    case '1':
-      output = "ONE";
-	break;
-
-    case '2':
-      output ="TWO";
-	break;
-	
-    case '3':
-      output = "THREE";
-	break;
-
-    case '4':
-      output = "FOUR";
-      break;
-
-    case '5':
-      output = "FIVE";
-      break;
-
-    case '6':
-      output = "SIX";
-      break;
-
-    case '7':
-    output = "SEVEN";
-    break;
-
-    case '8':
-      output = "EIGHT";
-      break;
-
-    case '9':
-      output = "NINE";
-      break;      
-    }
-    return output;
 }
-  
+
+void put_out_file(std::string location, std::string& msg, bool& ok_write){
+  std::ofstream out_file(location);
+  out_file << msg ;
+  if (out_file.good()) { ok_write = false;}
+}
 
 
-
-int main(int argc, char* argv[]){
+bool processCommandLine(const int argc,char* argv[], bool& help, bool& version, bool& in_err,bool& out_err,std::string& stuff, std::string& in_file_loc, std::string& out_file_loc){
 
   std::string argument{};
+  std::string temp{};
+  std::string othertemp{};
   for(int arg_check = 1; arg_check < argc; arg_check++){
     argument = argv[arg_check];
 
     //Check arguments for help flag
     if(argument == "--help" or argument == "-h"){
-      std::cout << std::endl << " --help options:" << std::endl;
-      std::cout << std::endl  << "Help??? I don't offer help to you!" << std::endl << std::endl ;
+      help = true;
+      
     }
     //Check arguments for version flag
     if(argument == "--version"){
-      std::cout << std::endl << " --which version:" << std::endl;
-      std::cout << std::endl  << "I prefer the versions before George Lucas 'remastered' them";
-      std::cout << std::endl << std::endl ;
+      version = true;
+      
     }
     //Check arguments for input file flag
     if(argument == "-i"){
-
-      //load_input ( using argv[arg_check + 1] )
-      std::cout<< "Using input file : " << argv[arg_check +1] << std::endl;
+      if(arg_check == argc -1){in_err = true;}
+      else{ in_file_loc = argv[arg_check +1];}
     }
 
     //Check arguments for output file flag
     if(argument == "-o"){
-
-      //output_file (to argv[arg_check + 1])
-      std::cout<< "Using ouput file : " << argv[arg_check +1] << std::endl;
+      if(arg_check == argc-1){out_err = true;}
+      else{out_file_loc = argv[arg_check +1];}
     }   
    }
- 
- 
-  std::string msg{};
-  std::string input{};
-  std::string temp{};
-  std::string othertemp{};
-  
+
   if(argc > 1){
 
-
+    
     //Add all arguments that aren't control options as the input to the cipher
     for(int arg_no = 1; arg_no < argc; arg_no++){
 
@@ -116,15 +65,52 @@ int main(int argc, char* argv[]){
       if(temp!="--help"&&temp!="-h"&&temp!="--version"&&temp!="-i"&&temp!="-o"){
 	othertemp = argv[arg_no - 1];
 	if(othertemp !="-i" && othertemp !="-o"){
-	  input += temp;}}
+	  stuff += temp;}}
     }
+    
+  }
+  return true;
+}
+  
 
+int main(int argc, char* argv[]){  
+ 
+  
+  std::string msg{};
+  std::string input{};
+  std::string stuff{};
+  std::string in_file_loc{};
+  std::string out_file_loc{};
+  
+
+  bool help{false};
+  bool version{false};
+  bool in_err{false};
+  bool out_err{false};
+
+  bool ok_read{false};
+  bool ok_write{false};
+
+  
+  bool blah = processCommandLine(argc,argv,help,version,in_err,out_err, stuff, in_file_loc, out_file_loc);
+
+  if(blah) { std::cout << "Command Line entry satisfactory" << std::endl;}
+  if(help) { help_called();}
+  if(version) {version_called();}
+  if(in_err) {input_error_called();}
+  if(out_err){output_error_called();}
+
+  if(!in_err){get_in_file(in_file_loc, input, ok_read);}
+  if(ok_write){}
+    
     
   //read in characters
   char in_char{'x'};
- 
+
+
+  msg += stuff;
   
-  for(int pos=0 ; pos < input.length(); pos++){
+  for(size_t pos=0 ; pos < input.length(); pos++){
     //while(std::cin >> in_char){
 
 
@@ -135,10 +121,17 @@ int main(int argc, char* argv[]){
     
     
              }
+
+  put_out_file(out_file_loc, msg, ok_write);
+
+  if(ok_write && ok_read){ std::cout << "everything went well" << std::endl;}
+
+
+  
       }
     
   /*Output the concatanated string and revel in
     your victory*/  
-  std::cout<< msg << std::endl;
+  //std::cout<< msg << std::endl;
   
-}
+
