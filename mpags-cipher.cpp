@@ -2,38 +2,102 @@
 #include <string>
 
 
+std::string transformChar(char input){
+  /* Function which transforms the input character into the correct type
+
+     input - character which is to be transformed
+
+     returns the transformed character */
+
+  std::string output{};
+  
+  if(isalpha(input)){
+    output = toupper(input);
+    
+    }   
+    
+    /* Check particular cases when entered characters
+       are numbers. Then append the number as a word
+       to the msg string */
+   
+    switch(input) {
+    case '0':
+      output= "ZERO";
+	break;
+
+    case '1':
+      output = "ONE";
+	break;
+
+    case '2':
+      output ="TWO";
+	break;
+	
+    case '3':
+      output = "THREE";
+	break;
+
+    case '4':
+      output = "FOUR";
+      break;
+
+    case '5':
+      output = "FIVE";
+      break;
+
+    case '6':
+      output = "SIX";
+      break;
+
+    case '7':
+    output = "SEVEN";
+    break;
+
+    case '8':
+      output = "EIGHT";
+      break;
+
+    case '9':
+      output = "NINE";
+      break;      
+    }
+    return output;
+}
+  
+
+
+
 int main(int argc, char* argv[]){
 
   std::string argument{};
   for(int arg_check = 1; arg_check < argc; arg_check++){
     argument = argv[arg_check];
 
-    
+    //Check arguments for help flag
     if(argument == "--help" or argument == "-h"){
       std::cout << std::endl << " --help options:" << std::endl;
       std::cout << std::endl  << "Help??? I don't offer help to you!" << std::endl << std::endl ;
     }
-
+    //Check arguments for version flag
     if(argument == "--version"){
       std::cout << std::endl << " --which version:" << std::endl;
       std::cout << std::endl  << "I prefer the versions before George Lucas 'remastered' them";
       std::cout << std::endl << std::endl ;
     }
-
+    //Check arguments for input file flag
     if(argument == "-i"){
 
       //load_input ( using argv[arg_check + 1] )
       std::cout<< "Using input file : " << argv[arg_check +1] << std::endl;
     }
 
+    //Check arguments for output file flag
     if(argument == "-o"){
 
       //output_file (to argv[arg_check + 1])
       std::cout<< "Using ouput file : " << argv[arg_check +1] << std::endl;
-    }
-    
-    
-  }
+    }   
+   }
  
  
   std::string msg{};
@@ -58,8 +122,7 @@ int main(int argc, char* argv[]){
     
   //read in characters
   char in_char{'x'};
-
-  
+ 
   
   for(int pos=0 ; pos < input.length(); pos++){
     //while(std::cin >> in_char){
@@ -68,68 +131,14 @@ int main(int argc, char* argv[]){
     /* Check if character is an alphabetic 
        letter, force it to be uppercase */
     in_char = input.at(pos);
-    if(isalpha(in_char)){
-      
-      msg += toupper(in_char);
-    }   
-
-
+    msg += transformChar(in_char);
     
-    /* Check particular cases when entered characters
-       are numbers. Then append the number as a word
-       to the msg string */
-
-   
-    switch(in_char) {
-
-    case '0':
-      msg += "ZERO";
-	break;
-
-    case '1':
-      msg += "ONE";
-	break;
-
-    case '2':
-      msg += "TWO";
-	break;
-	
-    case '3':
-      msg += "THREE";
-	break;
-
-    case '4':
-      msg += "FOUR";
-      break;
-
-    case '5':
-      msg += "FIVE";
-      break;
-
-    case '6':
-      msg += "SIX";
-      break;
-
-    case '7':
-    msg += "SEVEN";
-    break;
-
-    case '8':
-      msg += "EIGHT";
-      break;
-
-    case '9':
-      msg += "NINE";
-      break;
-    }
-  }
-  }
-    //}
-
-
+    
+             }
+      }
+    
   /*Output the concatanated string and revel in
-    your victory*/
-  
+    your victory*/  
   std::cout<< msg << std::endl;
   
 }
