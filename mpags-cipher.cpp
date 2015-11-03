@@ -46,6 +46,10 @@ bool processCommandLine(const int argc,char* argv[], bool& help, bool& version,b
   std::string argument{};
   std::string temp{};
   std::string othertemp{};
+
+  //more fill
+  stuff += "blah";
+
   for(int arg_check = 1; arg_check < argc; arg_check++){
     argument = argv[arg_check];
 
@@ -93,7 +97,7 @@ bool processCommandLine(const int argc,char* argv[], bool& help, bool& version,b
   /*
   if(argc > 1){
 
-    /*
+    
     //Add all arguments that aren't control options as the input to the cipher
     for(int arg_no = 1; arg_no < argc; arg_no++){
 
@@ -124,6 +128,9 @@ int main(int argc, char* argv[]){
   std::string in_file_loc{};
   std::string out_file_loc{};
   
+  //random fill
+  stuff += "blah";
+  
 
   bool help{false};
   bool version{false};
@@ -147,6 +154,13 @@ int main(int argc, char* argv[]){
   if(out_err){output_error_called();}
 
   if(!in_err && in_select){get_in_file(in_file_loc, input, ok_read);}
+  if(!in_select){
+    char in_char{'x'};
+    std::cout << "Text to encrypt, [ENTER] to submit text,  CTRL + D to run program   :  " << std::endl;
+    while(std::cin >> in_char){
+      input += in_char;
+    }
+  }
   else{get_command_text(input);}
   if(ok_write){}
   if(!key_select){std::cout << "No key selected, no encryption performed!" << std::endl;}
@@ -169,7 +183,8 @@ int main(int argc, char* argv[]){
 
   std::string encrypted = CaesarCipher(msg, key, decrypt);
 
-  put_out_file(out_file_loc, encrypted, ok_write);
+  if(out_select){put_out_file(out_file_loc, encrypted, ok_write);}
+  else{std::cout << encrypted << std::endl;}
 
   if(ok_write && ok_read){ std::cout << "everything went well" << std::endl;}
 }
