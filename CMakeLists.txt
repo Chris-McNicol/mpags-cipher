@@ -18,10 +18,18 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
 endif()
 
 #Declare the build of the mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/TransformChar.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
+add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/Cipher.cpp MPAGSCipher/TransformChar.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
 
 target_include_directories(mpags-cipher
   PRIVATE MPAGSCipher
   )
 
 target_compile_features(mpags-cipher PRIVATE cxx_auto_type cxx_range_for cxx_uniform_initialization )
+
+# - Install mpags-cipher using UNIX/GNU directory structure
+include(GNUInstallDirs)
+install(TARGETS mpags-cipher DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+# - Package mpags-cipher binaries and sources
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+include(CPack)
