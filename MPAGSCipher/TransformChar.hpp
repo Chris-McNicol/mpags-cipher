@@ -2,6 +2,7 @@
 #define MPAGSCIPHER_TRANSFORMCHAR_HPP
 
 
+
 #include <string>
 
 //|Transliterate char to string

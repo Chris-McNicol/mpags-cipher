@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+
+#include "CommandLineHelpers.hpp"
+
+//function to process the Command Line inputs, looking for flags etc.
+bool processCommandLine(const int argc,char* argv[], bool& help, bool& version,bool& in_select, bool& out_select, bool& in_err,bool& out_err, std::string& in_file_loc, std::string& out_file_loc, bool& decrypt, int& key, bool& key_select){
+
+  std::string argument{};
+  std::string temp{};
+  std::string othertemp{};
+
+ 
+  for(int arg_check = 1; arg_check < argc; arg_check++){
+    argument = argv[arg_check];
+
+    //Check arguments for help flag
+    if(argument == "--help" or argument == "-h"){
+      help = true;
+      
+    }
+    //Check arguments for version flag
+    if(argument == "--version"){
+      version = true;
+      
+    }
+    //Check arguments for input file flag
+    if(argument == "-i"){
+      in_select = true;
+      if(arg_check == argc -1){in_err = true;}
+      else{ in_file_loc = argv[arg_check +1];}
+    }
+
+    //Check arguments for output file flag
+    if(argument == "-o"){
+      out_select = true;
+      if(arg_check == argc-1){out_err = true;}
+      else{out_file_loc = argv[arg_check +1];}
+    }   
+
+    //check for key, default is 0 which won't encrypt
+    if(argument == "-key"){
+     
+      if(arg_check != argc-1){
+	key = atoi(argv[arg_check + 1]);
+	if( key != 0){ key_select = true;}
+	
+      }
+    }
+    
+    //check to see if message should be decrypted, default is encryption
+    if(argument == "-decrypt"){
+      decrypt = true;
+   }
+    
+  }
+
+  /*
+  if(argc > 1){
+
+    
+    //Add all arguments that aren't control options as the input to the cipher
+    for(int arg_no = 1; arg_no < argc; arg_no++){
+
+      temp = argv[arg_no];
+      
+      if(temp!="--help"&&temp!="-h"&&temp!="--version"&&temp!="-i"&&temp!="-o"){
+	othertemp = argv[arg_no - 1];
+	if(othertemp !="-i" && othertemp !="-o"){
+	  stuff += temp;}}
+	  }
+    
+  }*/
+  return true;
+}

@@ -18,7 +18,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
 endif()
 
 #Declare the build of the mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/Cipher.cpp MPAGSCipher/TransformChar.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
+add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp MPAGSCipher/TransformChar.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
 
 target_include_directories(mpags-cipher
   PRIVATE MPAGSCipher
