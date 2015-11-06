@@ -52,7 +52,7 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
     
     //check to see if message should be decrypted, default is encryption
     if(argument == "-decrypt"){
-      Info.decrypt = true;
+      Info.mode = CipherMode::Decrypt;
    }
     
   }

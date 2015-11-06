@@ -9,15 +9,13 @@
 #include "CommandLineHelpers.hpp"
 
 
-
+/// enum to describe whether to encrypt or decrypt
 enum class CipherMode {
-
   Decrypt,
   Encrypt
-
     };
 
-
+/// structure to hold the command line options
 struct CommandLineInfo {
 
   bool help = false;
@@ -38,7 +36,7 @@ struct CommandLineInfo {
 
 
 
-
+/// Processes the command line arguments into the CommandLineInfo structure
 bool processCommandLine(const int argc, char* argv[], CommandLineInfo& Info);
 
 #endif

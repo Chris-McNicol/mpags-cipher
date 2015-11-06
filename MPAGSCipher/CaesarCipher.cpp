@@ -5,8 +5,8 @@
 #include "CaesarCipher.hpp"
 
 
-CaesarCipher::CaesarCipher(int thekey, bool thedecrypt)
-  :alphabet_{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}, key_{thekey},decrypt_{thedecrypt}
+CaesarCipher::CaesarCipher(int thekey, CipherMode decrypt_mode)
+  :alphabet_{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}, key_{thekey},mode_{decrypt_mode}
    {
    }
    
@@ -26,7 +26,7 @@ char CaesarCipher::shift(char input){
     int shifter = key_;
  
     //decryption shifts the other way
-    if(decrypt_) { shifter = -key_;}
+    if(mode_ == CipherMode::Decrypt) { shifter = -key_;}
 
     //finds the index of the current char
     for(size_t i =0; i < alphabet_.size(); i++){
