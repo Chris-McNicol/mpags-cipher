@@ -101,9 +101,11 @@ int main(int argc, char* argv[]){
 
 
   //run the Cipher
-CaesarCipher my_cipher = CaesarCipher{Info.key, Info.decrypt};
+CaesarCipher my_cipher = CaesarCipher{Info.key, Info.mode};
 
 std::string encrypted = my_cipher.applyCipher(msg);
+
+
 
   //output the results
   if(Info.out_select){put_out_file(Info.out_file_loc, encrypted, ok_write);}
