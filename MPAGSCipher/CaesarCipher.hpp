@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "processCommandLine.hpp"
+#include "ProcessCommandLine.hpp"
 
 /**
  *CaesarCipher contains the alphabet, the key of the cipher

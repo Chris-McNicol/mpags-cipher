@@ -5,7 +5,9 @@
 
 #include <string>
 
-//|Transliterate char to string
+/** \param c the character to be transformed
+ * \return an upper case character, as a string. Numbers are spelled out.
+ **/
 std::string transformChar(char c);
 
 #endif // MPAGSCIPHER_TRANSFORMCHAR_HPP
