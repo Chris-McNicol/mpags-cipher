@@ -23,6 +23,9 @@ SUFFIXES =
 .SUFFIXES: .hpux_make_needs_suffix_list
 
 
+# Produce verbose output by default.
+VERBOSE = 1
+
 # Suppress display of executed commands.
 $(VERBOSE).SILENT:
 
@@ -39,27 +42,60 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/epp/phrfwb/Software/cmake-3.3.2-Linux-x86_64/bin/cmake
+CMAKE_COMMAND = /home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake
 
 # The command to remove a file.
-RM = /home/epp/phrfwb/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -E remove -f
+RM = /home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing
+CMAKE_SOURCE_DIR = /home/user16/Documents/mpags-cpp/mpags-cipher.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing
+CMAKE_BINARY_DIR = /home/user16/Documents/mpags-cpp/mpags-cipher.git
 
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && /disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cpack --config ./CPackConfig.cmake
+.PHONY : package
+
+# Special rule for the target package
+package/fast: package
+
+.PHONY : package/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && /disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cpack --config ./CPackSourceConfig.cmake /home/user16/Documents/mpags-cpp/mpags-cipher.git/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+
+.PHONY : package_source/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/home/epp/phrfwb/Software/cmake-3.3.2-Linux-x86_64/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -70,7 +106,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/epp/phrfwb/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -78,16 +114,60 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/disk/homedisk/home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/CMakeFiles /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/CMakeFiles 0
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(CMAKE_COMMAND) -E cmake_progress_start /home/user16/Documents/mpags-cpp/mpags-cipher.git/CMakeFiles /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/CMakeFiles/progress.marks
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user16/Documents/mpags-cpp/mpags-cipher.git/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,46 +177,144 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named testHello
+# Convenience name for target.
+Testing/CMakeFiles/testCatch.dir/rule:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/CMakeFiles/testCatch.dir/rule
+.PHONY : Testing/CMakeFiles/testCatch.dir/rule
 
-# Build rule for target.
-testHello: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 testHello
+# Convenience name for target.
+testCatch: Testing/CMakeFiles/testCatch.dir/rule
+
+.PHONY : testCatch
+
+# fast build rule for target.
+testCatch/fast:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testCatch.dir/build.make Testing/CMakeFiles/testCatch.dir/build
+.PHONY : testCatch/fast
+
+# Convenience name for target.
+Testing/CMakeFiles/testHello.dir/rule:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/CMakeFiles/testHello.dir/rule
+.PHONY : Testing/CMakeFiles/testHello.dir/rule
+
+# Convenience name for target.
+testHello: Testing/CMakeFiles/testHello.dir/rule
+
 .PHONY : testHello
 
 # fast build rule for target.
 testHello/fast:
-	$(MAKE) -f CMakeFiles/testHello.dir/build.make CMakeFiles/testHello.dir/build
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testHello.dir/build.make Testing/CMakeFiles/testHello.dir/build
 .PHONY : testHello/fast
 
+# Convenience name for target.
+Testing/CMakeFiles/testTransformChar.dir/rule:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f CMakeFiles/Makefile2 Testing/CMakeFiles/testTransformChar.dir/rule
+.PHONY : Testing/CMakeFiles/testTransformChar.dir/rule
+
+# Convenience name for target.
+testTransformChar: Testing/CMakeFiles/testTransformChar.dir/rule
+
+.PHONY : testTransformChar
+
+# fast build rule for target.
+testTransformChar/fast:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testTransformChar.dir/build.make Testing/CMakeFiles/testTransformChar.dir/build
+.PHONY : testTransformChar/fast
+
+testCatch.o: testCatch.cpp.o
+
+.PHONY : testCatch.o
+
 # target to build an object file
-testHello.o:
-	$(MAKE) -f CMakeFiles/testHello.dir/build.make CMakeFiles/testHello.dir/testHello.o
-.PHONY : testHello.o
+testCatch.cpp.o:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testCatch.dir/build.make Testing/CMakeFiles/testCatch.dir/testCatch.cpp.o
+.PHONY : testCatch.cpp.o
+
+testCatch.i: testCatch.cpp.i
+
+.PHONY : testCatch.i
 
 # target to preprocess a source file
-testHello.i:
-	$(MAKE) -f CMakeFiles/testHello.dir/build.make CMakeFiles/testHello.dir/testHello.i
-.PHONY : testHello.i
+testCatch.cpp.i:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testCatch.dir/build.make Testing/CMakeFiles/testCatch.dir/testCatch.cpp.i
+.PHONY : testCatch.cpp.i
+
+testCatch.s: testCatch.cpp.s
+
+.PHONY : testCatch.s
 
 # target to generate assembly for a file
-testHello.s:
-	$(MAKE) -f CMakeFiles/testHello.dir/build.make CMakeFiles/testHello.dir/testHello.s
+testCatch.cpp.s:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testCatch.dir/build.make Testing/CMakeFiles/testCatch.dir/testCatch.cpp.s
+.PHONY : testCatch.cpp.s
+
+testHello.o: testHello.cpp.o
+
+.PHONY : testHello.o
+
+# target to build an object file
+testHello.cpp.o:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testHello.dir/build.make Testing/CMakeFiles/testHello.dir/testHello.cpp.o
+.PHONY : testHello.cpp.o
+
+testHello.i: testHello.cpp.i
+
+.PHONY : testHello.i
+
+# target to preprocess a source file
+testHello.cpp.i:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testHello.dir/build.make Testing/CMakeFiles/testHello.dir/testHello.cpp.i
+.PHONY : testHello.cpp.i
+
+testHello.s: testHello.cpp.s
+
 .PHONY : testHello.s
+
+# target to generate assembly for a file
+testHello.cpp.s:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testHello.dir/build.make Testing/CMakeFiles/testHello.dir/testHello.cpp.s
+.PHONY : testHello.cpp.s
+
+testTransformChar.o: testTransformChar.cpp.o
+
+.PHONY : testTransformChar.o
+
+# target to build an object file
+testTransformChar.cpp.o:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testTransformChar.dir/build.make Testing/CMakeFiles/testTransformChar.dir/testTransformChar.cpp.o
+.PHONY : testTransformChar.cpp.o
+
+testTransformChar.i: testTransformChar.cpp.i
+
+.PHONY : testTransformChar.i
+
+# target to preprocess a source file
+testTransformChar.cpp.i:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testTransformChar.dir/build.make Testing/CMakeFiles/testTransformChar.dir/testTransformChar.cpp.i
+.PHONY : testTransformChar.cpp.i
+
+testTransformChar.s: testTransformChar.cpp.s
+
+.PHONY : testTransformChar.s
+
+# target to generate assembly for a file
+testTransformChar.cpp.s:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(MAKE) -f Testing/CMakeFiles/testTransformChar.dir/build.make Testing/CMakeFiles/testTransformChar.dir/testTransformChar.cpp.s
+.PHONY : testTransformChar.cpp.s
 
 # Help Target
 help:
@@ -144,12 +322,27 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... package"
+	@echo "... test"
+	@echo "... package_source"
+	@echo "... testHello"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... testHello"
+	@echo "... testCatch"
+	@echo "... testTransformChar"
+	@echo "... install/local"
+	@echo "... install"
+	@echo "... install/strip"
+	@echo "... list_install_components"
+	@echo "... testCatch.o"
+	@echo "... testCatch.i"
+	@echo "... testCatch.s"
 	@echo "... testHello.o"
 	@echo "... testHello.i"
 	@echo "... testHello.s"
+	@echo "... testTransformChar.o"
+	@echo "... testTransformChar.i"
+	@echo "... testTransformChar.s"
 .PHONY : help
 
 
@@ -161,6 +354,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -18,6 +18,9 @@ SUFFIXES =
 .SUFFIXES: .hpux_make_needs_suffix_list
 
 
+# Produce verbose output by default.
+VERBOSE = 1
+
 # Suppress display of executed commands.
 $(VERBOSE).SILENT:
 
@@ -34,80 +37,80 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/epp/phrfwb/Software/cmake-3.3.2-Linux-x86_64/bin/cmake
+CMAKE_COMMAND = /home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake
 
 # The command to remove a file.
-RM = /home/epp/phrfwb/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -E remove -f
+RM = /home/user16/Software/cmake-3.3.2-Linux-x86_64/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing
+CMAKE_SOURCE_DIR = /home/user16/Documents/mpags-cpp/mpags-cipher.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing
+CMAKE_BINARY_DIR = /home/user16/Documents/mpags-cpp/mpags-cipher.git
 
 # Include any dependencies generated for this target.
-include CMakeFiles/testHello.dir/depend.make
+include Testing/CMakeFiles/testHello.dir/depend.make
 
 # Include the progress variables for this target.
-include CMakeFiles/testHello.dir/progress.make
+include Testing/CMakeFiles/testHello.dir/progress.make
 
 # Include the compile flags for this target's objects.
-include CMakeFiles/testHello.dir/flags.make
+include Testing/CMakeFiles/testHello.dir/flags.make
 
-CMakeFiles/testHello.dir/testHello.o: CMakeFiles/testHello.dir/flags.make
-CMakeFiles/testHello.dir/testHello.o: testHello.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testHello.dir/testHello.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/testHello.dir/testHello.o -c /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/testHello.cpp
+Testing/CMakeFiles/testHello.dir/testHello.cpp.o: Testing/CMakeFiles/testHello.dir/flags.make
+Testing/CMakeFiles/testHello.dir/testHello.cpp.o: Testing/testHello.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user16/Documents/mpags-cpp/mpags-cipher.git/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Testing/CMakeFiles/testHello.dir/testHello.cpp.o"
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing && /bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/testHello.dir/testHello.cpp.o -c /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testHello.cpp
 
-CMakeFiles/testHello.dir/testHello.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testHello.dir/testHello.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/testHello.cpp > CMakeFiles/testHello.dir/testHello.i
+Testing/CMakeFiles/testHello.dir/testHello.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testHello.dir/testHello.cpp.i"
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing && /bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testHello.cpp > CMakeFiles/testHello.dir/testHello.cpp.i
 
-CMakeFiles/testHello.dir/testHello.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testHello.dir/testHello.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/testHello.cpp -o CMakeFiles/testHello.dir/testHello.s
+Testing/CMakeFiles/testHello.dir/testHello.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testHello.dir/testHello.cpp.s"
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing && /bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testHello.cpp -o CMakeFiles/testHello.dir/testHello.cpp.s
 
-CMakeFiles/testHello.dir/testHello.o.requires:
+Testing/CMakeFiles/testHello.dir/testHello.cpp.o.requires:
 
-.PHONY : CMakeFiles/testHello.dir/testHello.o.requires
+.PHONY : Testing/CMakeFiles/testHello.dir/testHello.cpp.o.requires
 
-CMakeFiles/testHello.dir/testHello.o.provides: CMakeFiles/testHello.dir/testHello.o.requires
-	$(MAKE) -f CMakeFiles/testHello.dir/build.make CMakeFiles/testHello.dir/testHello.o.provides.build
-.PHONY : CMakeFiles/testHello.dir/testHello.o.provides
+Testing/CMakeFiles/testHello.dir/testHello.cpp.o.provides: Testing/CMakeFiles/testHello.dir/testHello.cpp.o.requires
+	$(MAKE) -f Testing/CMakeFiles/testHello.dir/build.make Testing/CMakeFiles/testHello.dir/testHello.cpp.o.provides.build
+.PHONY : Testing/CMakeFiles/testHello.dir/testHello.cpp.o.provides
 
-CMakeFiles/testHello.dir/testHello.o.provides.build: CMakeFiles/testHello.dir/testHello.o
+Testing/CMakeFiles/testHello.dir/testHello.cpp.o.provides.build: Testing/CMakeFiles/testHello.dir/testHello.cpp.o
 
 
 # Object files for target testHello
 testHello_OBJECTS = \
-"CMakeFiles/testHello.dir/testHello.o"
+"CMakeFiles/testHello.dir/testHello.cpp.o"
 
 # External object files for target testHello
 testHello_EXTERNAL_OBJECTS =
 
-testHello: CMakeFiles/testHello.dir/testHello.o
-testHello: CMakeFiles/testHello.dir/build.make
-testHello: CMakeFiles/testHello.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable testHello"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testHello.dir/link.txt --verbose=$(VERBOSE)
+Testing/testHello: Testing/CMakeFiles/testHello.dir/testHello.cpp.o
+Testing/testHello: Testing/CMakeFiles/testHello.dir/build.make
+Testing/testHello: Testing/CMakeFiles/testHello.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/user16/Documents/mpags-cpp/mpags-cipher.git/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable testHello"
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testHello.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/testHello.dir/build: testHello
+Testing/CMakeFiles/testHello.dir/build: Testing/testHello
 
-.PHONY : CMakeFiles/testHello.dir/build
+.PHONY : Testing/CMakeFiles/testHello.dir/build
 
-CMakeFiles/testHello.dir/requires: CMakeFiles/testHello.dir/testHello.o.requires
+Testing/CMakeFiles/testHello.dir/requires: Testing/CMakeFiles/testHello.dir/testHello.cpp.o.requires
 
-.PHONY : CMakeFiles/testHello.dir/requires
+.PHONY : Testing/CMakeFiles/testHello.dir/requires
 
-CMakeFiles/testHello.dir/clean:
-	$(CMAKE_COMMAND) -P CMakeFiles/testHello.dir/cmake_clean.cmake
-.PHONY : CMakeFiles/testHello.dir/clean
+Testing/CMakeFiles/testHello.dir/clean:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing && $(CMAKE_COMMAND) -P CMakeFiles/testHello.dir/cmake_clean.cmake
+.PHONY : Testing/CMakeFiles/testHello.dir/clean
 
-CMakeFiles/testHello.dir/depend:
-	cd /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing /home/epp/phrfwb/Documents/mpags-cipher/mpags-cipher.git/Testing/CMakeFiles/testHello.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : CMakeFiles/testHello.dir/depend
+Testing/CMakeFiles/testHello.dir/depend:
+	cd /home/user16/Documents/mpags-cpp/mpags-cipher.git && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user16/Documents/mpags-cpp/mpags-cipher.git /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing /home/user16/Documents/mpags-cpp/mpags-cipher.git /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/CMakeFiles/testHello.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : Testing/CMakeFiles/testHello.dir/depend
 

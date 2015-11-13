@@ -40,12 +40,22 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
       else{Info.out_file_loc = argv[arg_check +1];}
     }   
 
+    if(argument == "-cipher"){
+
+      if(arg_check == argc-1){Info.cipher_err = true;}
+      else if (argument == "playfair" || argument == "Playfair"){
+	Info.ciphertype = CipherType::Playfair;}
+      else if (argument == "caesar" || argument == "Caesar"){
+	Info.ciphertype = CipherType::Caesar;}
+      else{Info.cipher_err = true;}
+    }
+    
     //check for key, default is 0 which won't encrypt
     if(argument == "-key"){
      
       if(arg_check != argc-1){
-	Info.key = atoi(argv[arg_check + 1]);
-	if( Info.key != 0){ Info.key_select = true;}
+	Info.key = argv[arg_check + 1];
+	//if( Info.key != 0){ Info.key_select = true;}
 	
       }
     }

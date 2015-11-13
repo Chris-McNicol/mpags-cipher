@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 #include "ProcessCommandLine.hpp"
 
@@ -24,7 +25,7 @@ class CaesarCipher{
    * \param key the key to the cipher. \param decrypt the flag, true is decrypt
    **/
   
-  CaesarCipher(int constructorkey, CipherMode mode);
+  CaesarCipher(std::string constructorkey, CipherMode mode);
 
   /// \return an index in range [0,25] \param index the index to be wrapped
   int wrapIt(int index);

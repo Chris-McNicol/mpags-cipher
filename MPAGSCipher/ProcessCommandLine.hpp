@@ -17,6 +17,13 @@ enum class CipherMode {
 
     };
 
+enum class CipherType {
+
+  Caesar,
+  Playfair
+
+    };
+
 ///Structure to hold the information passed into the command line by the user.
 struct CommandLineInfo {
 
@@ -27,8 +34,10 @@ struct CommandLineInfo {
   bool in_err = false;
   bool out_err = false;
   CipherMode mode;
-  int key = 0;
+  std::string key;
   bool key_select = false;
+  bool cipher_err = false;
+  CipherType ciphertype;
   
   std::string in_file_loc;
   std::string out_file_loc;

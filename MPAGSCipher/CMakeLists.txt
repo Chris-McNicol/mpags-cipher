@@ -14,7 +14,7 @@ add_library( MPAGSCipher STATIC
  )
 
 target_include_directories(MPAGSCipher
-	PUBLIC ${CMAKE_CURRENT_LIST_DIR}
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 
 target_compile_features(MPAGSCipher

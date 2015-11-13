@@ -7,7 +7,8 @@
 #include "TransformChar.hpp"
 #include "CommandLineHelpers.hpp"
 #include "CaesarCipher.hpp"
-#include "processCommandLine.hpp"
+#include "ProcessCommandLine.hpp"
+#include "PlayfairCipher.hpp"
 
 
 
@@ -40,14 +41,7 @@ void put_out_file(std::string location, std::string& msg, bool& ok_write){
   if (out_file.good()) { ok_write = true;}
 }
 
-/*
-//function that sets up a cipher and uses it
-std::string funCaesarCipher(std::string msg, int key, bool decrypt){
 
-  CaesarCipher my_cipher = CaesarCipher(key, decrypt);
-  return my_cipher.apply_cipher(msg);
-}
-*/
 
   
 

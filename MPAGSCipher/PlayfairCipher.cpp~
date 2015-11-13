@@ -1,0 +1,32 @@
+
+#include <vector>
+#include <string>
+
+#include "PlayfairCipher.hpp"
+
+
+PlayfairCipher::PlayfairCipher(String thekey, CipherMode decrypt_mode)
+  :key_{thekey)},mode_{decrypt_mode}
+   {
+   }
+   
+
+PlayfairCipher::setKey(std::string keyToSet){
+  key_ = keyToSet;
+}
+
+  //applies shift for each char in a string
+std::string PlayfairCipher::applyCipher(std::string msg){
+
+  return msg;
+   }    
+
+
+
+
+
+
+
+
+
+

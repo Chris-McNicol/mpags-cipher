@@ -1,0 +1,6 @@
+test-hello 2 0.0013175
+test-catch 0 0
+test-transformChar 0 0
+---
+test-catch
+test-transformChar

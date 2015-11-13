@@ -5,8 +5,8 @@
 #include "CaesarCipher.hpp"
 
 
-CaesarCipher::CaesarCipher(int thekey, CipherMode decrypt_mode)
-  :alphabet_{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}, key_{thekey},mode_{decrypt_mode}
+CaesarCipher::CaesarCipher(std::string thekey, CipherMode decrypt_mode)
+  :alphabet_{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}, key_{std::stoi(thekey)},mode_{decrypt_mode}
    {
    }
    

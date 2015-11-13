@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/testHello.dir/testHello.o  -o testHello -rdynamic 
+/bin/c++   -Wall -Wextra -Werror -Wfatal-errors -Wshadow -pedantic   CMakeFiles/testHello.dir/testHello.cpp.o  -o testHello -rdynamic 

@@ -1,0 +1,96 @@
+Start testing: Nov 13 10:54 GMT
+----------------------------------------------------------
+1/3 Testing: test-hello
+1/3 Test: test-hello
+Command: "/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testHello"
+Directory: /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing
+"test-hello" start time: Nov 13 10:54 GMT
+Output:
+----------------------------------------------------------
+Hello World!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test-hello" end time: Nov 13 10:54 GMT
+"test-hello" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: test-catch
+2/3 Test: test-catch
+Command: "/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testCatch"
+Directory: /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing
+"test-catch" start time: Nov 13 10:54 GMT
+Output:
+----------------------------------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+testCatch is a Catch v1.2.1 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Subtraction fails
+-------------------------------------------------------------------------------
+/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testCatch.cpp:9
+...............................................................................
+
+/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testCatch.cpp:10: FAILED:
+  REQUIRE( (1-1==1) )
+with expansion:
+  false
+
+===============================================================================
+test cases: 2 | 1 passed | 1 failed
+assertions: 2 | 1 passed | 1 failed
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"test-catch" end time: Nov 13 10:54 GMT
+"test-catch" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: test-transformChar
+3/3 Test: test-transformChar
+Command: "/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testTransformChar"
+Directory: /home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing
+"test-transformChar" start time: Nov 13 10:54 GMT
+Output:
+----------------------------------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+testTransformChar is a Catch v1.2.1 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Characters are uppercase
+-------------------------------------------------------------------------------
+/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testTransformChar.cpp:7
+...............................................................................
+
+/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testTransformChar.cpp:8: FAILED:
+  REQUIRE( false )
+
+-------------------------------------------------------------------------------
+Special characters are removed
+-------------------------------------------------------------------------------
+/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testTransformChar.cpp:24
+...............................................................................
+
+/home/user16/Documents/mpags-cpp/mpags-cipher.git/Testing/testTransformChar.cpp:25: FAILED:
+  REQUIRE( false )
+
+===============================================================================
+test cases:  3 |  1 passed | 2 failed
+assertions: 12 | 10 passed | 2 failed
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"test-transformChar" end time: Nov 13 10:54 GMT
+"test-transformChar" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 13 10:54 GMT
