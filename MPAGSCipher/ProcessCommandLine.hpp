@@ -33,7 +33,7 @@ struct CommandLineInfo {
   bool out_select = false;
   bool in_err = false;
   bool out_err = false;
-  CipherMode mode;
+  CipherMode mode = CipherMode::Encrypt;
   std::string key;
   bool key_select = false;
   bool cipher_err = false;

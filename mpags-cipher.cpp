@@ -18,6 +18,13 @@ void readStream(T& input, S& msg_string){
   input >> msg_string ;
 }
 
+//template for using Cipher
+
+template <typename C, typename S>
+std::string applyCipher(C& Cipher, S& input_string){
+  return Cipher.encrypt(input_string);
+}
+ 
 
 //function to get input text from file
 void get_in_file(std::string location, std::string& msg_string, bool& ok_read){
@@ -74,7 +81,7 @@ int main(int argc, char* argv[]){
          get_in_file(Info.in_file_loc, input, ok_read);}
     
   if(!Info.in_select){    
-    std::cout << "Text to encrypt, [ENTER] to submit text,  CTRL + D to run program   :  " << std::endl;
+    std::cout << "Text to encrypt, [ENTER] to submit text   :  " << std::endl;
     get_command_text(input);
   }
   
@@ -95,9 +102,12 @@ int main(int argc, char* argv[]){
 
 
   //run the Cipher
-CaesarCipher my_cipher = CaesarCipher{Info.key, Info.mode};
+PlayfairCipher my_cipher = PlayfairCipher{Info.key, Info.mode};
 
-std::string encrypted = my_cipher.applyCipher(msg);
+ 
+std::string encrypted = my_cipher.encrypt(msg);
+
+ my_cipher.makeItLookNice(encrypted);
 
 
 

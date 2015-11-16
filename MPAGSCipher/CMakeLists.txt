@@ -11,6 +11,10 @@ add_library( MPAGSCipher STATIC
 	      TransformChar.cpp
 	      CommandLineHelpers.hpp
 	      CommandLineHelpers.cpp
+	      PlayfairCipher.hpp
+	      PlayfairCipher.cpp
+	      VigenereCipher.hpp
+	      VigenereCipher.cpp
  )
 
 target_include_directories(MPAGSCipher

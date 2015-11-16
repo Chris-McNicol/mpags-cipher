@@ -26,7 +26,8 @@ char CaesarCipher::shift(char input){
     int shifter = key_;
  
     //decryption shifts the other way
-    if(mode_ == CipherMode::Decrypt) { shifter = -key_;}
+    if(mode_ == CipherMode::Decrypt) {
+      shifter = -key_;}
 
     //finds the index of the current char
     for(size_t i =0; i < alphabet_.size(); i++){
@@ -42,7 +43,7 @@ char CaesarCipher::shift(char input){
 
 
   //applies shift for each char in a string
-std::string CaesarCipher::applyCipher(std::string msg){
+std::string CaesarCipher::encrypt(std::string msg){
 
     std::string output{};
     
