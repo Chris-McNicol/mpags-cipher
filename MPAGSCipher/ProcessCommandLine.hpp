@@ -30,18 +30,15 @@ struct CommandLineInfo {
 
   bool help = false;
   bool version = false ;
-  bool in_select = false ;
-  bool out_select = false;
   bool in_err = false;
   bool out_err = false;
   CipherMode mode = CipherMode::Encrypt;
   std::string key;
-  bool key_select = false;
   bool cipher_err = false;
   CipherType ciphertype;
   
-  std::string in_file_loc;
-  std::string out_file_loc;
+  std::string in_file_loc = "";
+  std::string out_file_loc= "";
 
 };
 

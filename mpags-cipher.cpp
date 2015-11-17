@@ -88,15 +88,17 @@ int main(int argc, char* argv[]){
   if(Info.out_err){output_error_called(); return -1;}
 
 
-  if(!(Info.in_err) && Info.in_select){
+  if(!(Info.in_err) && (Info.in_file_loc != "")){
          get_in_file(Info.in_file_loc, input, ok_read);}
     
-  if(!Info.in_select){    
+  if(Info.in_file_loc == ""){    
     std::cout << "Text to encrypt, [ENTER] to submit text   :  " << std::endl;
     get_command_text(input);
   }
   
-  if(!Info.key_select){std::cout << "No key selected, no encryption performed!" << std::endl;}
+  if(Info.key == ""){std::cout << "No key selected, no encryption performed!" << std::endl;
+
+    return -1;}
     
 
   char in_char{'x'};  
