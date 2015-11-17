@@ -5,10 +5,13 @@
 #include "CaesarCipher.hpp"
 
 
+
 CaesarCipher::CaesarCipher(std::string thekey, CipherMode decrypt_mode)
   :alphabet_{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}, key_{std::stoi(thekey)},mode_{decrypt_mode}
    {
    }
+
+
    
   //wrap the index so it won't go out of bounds
 int CaesarCipher::wrapIt(int index){
@@ -54,7 +57,9 @@ std::string CaesarCipher::encrypt(std::string msg){
    }    
 
 
-
+void CaesarCipher::makeItLookNice(std::string& msg){
+  msg+="";
+}
 
 
 

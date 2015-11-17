@@ -9,6 +9,7 @@
 
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
+#include "TransformChar.hpp"
 
 /**
  *VigenereCipher contains the all 26 possible Caesar Ciphers based on the key_ word
@@ -22,7 +23,8 @@ class VigenereCipher{
 
   public:
 
-  std::map<char, CaesarCipher> char2Cipher;
+  
+  std::vector<CaesarCipher> cipher_Holder_;
 
 
   /**Create a new Vigenere
@@ -33,7 +35,7 @@ class VigenereCipher{
   VigenereCipher(std::string constructorkey, CipherMode mode);
 
 
-  void createMaps();
+  void createCiphers();
 
   CipherMode getMode();
   

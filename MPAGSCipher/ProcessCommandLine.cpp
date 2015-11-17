@@ -45,13 +45,15 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
       if(arg_check == argc-1){Info.cipher_err = true;}
       else if (argument == "playfair" || argument == "Playfair"){
 	Info.ciphertype = CipherType::Playfair;}
+      else if (argument == "vigenere" || argument == "Vigenere"){
+	Info.ciphertype = CipherType::Vigenere; }
       else if (argument == "caesar" || argument == "Caesar"){
 	Info.ciphertype = CipherType::Caesar;}
       else{Info.cipher_err = true;}
     }
     
     //check for key, default is 0 which won't encrypt
-    if(argument == "-key"){
+    if(argument == "-key" || argument == "-k" ){
      
       if(arg_check != argc-1){
 	Info.key = argv[arg_check + 1];

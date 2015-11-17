@@ -11,30 +11,43 @@
 
 
 VigenereCipher::VigenereCipher(std::string thekey, CipherMode decrypt_mode)
-  :key_{thekey},mode_{decrypt_mode}
+  :mode_{decrypt_mode}
    {
-     createMaps();
+     std::string transformedKey{""};
+     char in_char{'x'};
+     for(size_t pos=0; pos < thekey.length(); pos++){
+       in_char = thekey.at(pos);
+       transformedKey += transformChar(in_char);
+     }
+     key_ = transformedKey;
+     createCiphers();
        }
    
 CipherMode VigenereCipher::getMode(){
   return mode_;
 }
 
-void VigenereCipher::createMaps(){
+void VigenereCipher::createCiphers(){
 
-  char index{};
-  for(int i = 65; i < 91; i++){
-    index = char(i);
-    std::string thiskey = std::to_string(i-64);
-    CaesarCipher this_Cipher = CaesarCipher{thiskey, getMode()};
-    std::pair<char, CaesarCipher> iLikePears = std::make_pair(index,this_Cipher);
-    char2Cipher.insert(iLikePears);
+  
+
+  for(int i =0; i <26; ++i){
+
+    cipher_Holder_.push_back(CaesarCipher(std::to_string(i+1), mode_));
   }
-}
+
+    
+
+
+
+
+  }
+
 
 std::string VigenereCipher::encrypt(std::string msg){
 
   //generate keyphrase of the right length
+  
 
   std::string keyphrase{""};
 
@@ -44,17 +57,23 @@ std::string VigenereCipher::encrypt(std::string msg){
   }
   size_t need_to_erase = keyphrase.length() - msg.length();
 
-  keyphrase.erase(msg.length() - 1, need_to_erase);
+  keyphrase.erase(msg.length(), need_to_erase);
 
+  std::cout << "keyphrase: " << keyphrase << std::endl;
 
   std::string encrypted{""};
 
-  for(size_t pos; pos < msg.length(); pos++){
 
-    auto find_iter = char2Cipher.find(keyphrase[pos]);
-    encrypted += (*find_iter).second.encrypt(std::to_string(msg[pos]));
 
- 
+  for(size_t pos=0; pos < msg.length(); pos++){
+
+    
+    char fowl = (keyphrase.c_str())[pos];
+    int ming = int(fowl);
+    ming -= 65;
+    std::string doodah = msg.substr(pos, size_t(1));
+     encrypted += cipher_Holder_[ming].encrypt(doodah);
+
    }
   return encrypted;
 }
@@ -62,18 +81,7 @@ std::string VigenereCipher::encrypt(std::string msg){
 
 void VigenereCipher::makeItLookNice(std::string& msg){
 
-  if( msg[msg.length() - 1] == 'Z'){
-
-    msg.erase(msg.length()-1, 1);
-  }
-
-
-  for(size_t pos=0; pos < msg.length() -1; pos++){
-
-    if( (msg[pos] == 'X') && (msg[pos+1] == msg[pos-1])){
-      msg.erase(pos, 1);
-    }
-  }
+  msg+="";
 }
 
 

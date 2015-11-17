@@ -23,7 +23,7 @@ enable_testing()
 add_subdirectory(Testing)
 
 #Declare the build of the mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/VigenereCipher.hpp MPAGSCipher/VigenereCipher.cpp MPAGSCipher/PlayfairCipher.hpp MPAGSCipher/PlayfairCipher.cpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp MPAGSCipher/TransformChar.hpp MPAGSCipher/ProcessCommandLine.cpp MPAGSCipher/ProcessCommandLine.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
+add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/CustomExceptions.cpp MPAGSCipher/VigenereCipher.hpp MPAGSCipher/VigenereCipher.cpp MPAGSCipher/PlayfairCipher.hpp MPAGSCipher/PlayfairCipher.cpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp MPAGSCipher/TransformChar.hpp MPAGSCipher/ProcessCommandLine.cpp MPAGSCipher/ProcessCommandLine.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
 
 target_include_directories(mpags-cipher
   PRIVATE MPAGSCipher

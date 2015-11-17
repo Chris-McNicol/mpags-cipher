@@ -6,9 +6,11 @@
 // Our program headers
 #include "TransformChar.hpp"
 #include "CommandLineHelpers.hpp"
-#include "CaesarCipher.hpp"
 #include "ProcessCommandLine.hpp"
+#include "CaesarCipher.hpp"
 #include "PlayfairCipher.hpp"
+#include "VigenereCipher.hpp"
+
 
 
 
@@ -22,7 +24,10 @@ void readStream(T& input, S& msg_string){
 
 template <typename C, typename S>
 std::string applyCipher(C& Cipher, S& input_string){
-  return Cipher.encrypt(input_string);
+  std::string encrypted = Cipher.encrypt(input_string);
+  Cipher.makeItLookNice(encrypted);
+
+  return encrypted;
 }
  
 
@@ -69,14 +74,20 @@ int main(int argc, char* argv[]){
   
   
   CommandLineInfo Info;
-  bool blah = processCommandLine(argc,argv,Info);
+  bool blah{false};
+ 
+  blah = processCommandLine(argc,argv,Info);
+  
 
+ 
 
   if(blah) { std::cout << "Command Line entry satisfactory" << std::endl;}
-  if(Info.help) { help_called();}
-  if(Info.version) {version_called();}
-  if(Info.in_err) {input_error_called();}
-  if(Info.out_err){output_error_called();}
+  if(Info.help) { help_called();    return -1;}
+  if(Info.version) {version_called();    return -1;}
+  if(Info.in_err) {input_error_called(); return -1;}
+  if(Info.out_err){output_error_called(); return -1;}
+
+
   if(!(Info.in_err) && Info.in_select){
          get_in_file(Info.in_file_loc, input, ok_read);}
     
@@ -88,8 +99,7 @@ int main(int argc, char* argv[]){
   if(!Info.key_select){std::cout << "No key selected, no encryption performed!" << std::endl;}
     
 
-  char in_char{'x'};
-  
+  char in_char{'x'};  
   for(size_t pos=0 ; pos < input.length(); pos++){
     
     /* Check if character is an alphabetic 
@@ -99,15 +109,25 @@ int main(int argc, char* argv[]){
     msg += transformChar(in_char); 
        }
 
+  
 
 
   //run the Cipher
-PlayfairCipher my_cipher = PlayfairCipher{Info.key, Info.mode};
+  std::string encrypted{""};
+  if(Info.ciphertype == CipherType::Vigenere){
+    VigenereCipher my_cipher = VigenereCipher{Info.key, Info.mode};
+    encrypted = applyCipher(my_cipher,msg); }
 
- 
-std::string encrypted = my_cipher.encrypt(msg);
+ else if(Info.ciphertype == CipherType::Playfair){
+   PlayfairCipher my_cipher = PlayfairCipher(Info.key, Info.mode);
+   encrypted = applyCipher(my_cipher,msg);
+ }
 
- my_cipher.makeItLookNice(encrypted);
+ else if(Info.ciphertype == CipherType::Caesar){
+   CaesarCipher my_cipher = CaesarCipher(Info.key, Info.mode); 
+   encrypted = applyCipher(my_cipher, msg); }
+
+
 
 
 

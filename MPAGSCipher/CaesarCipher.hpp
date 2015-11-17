@@ -19,6 +19,11 @@ public:
   const int key_ = 0;
   const CipherMode mode_ = CipherMode::Encrypt;
 
+
+
+
+ 
+
   //public:
 
   /**Create a new CaesarCipher
@@ -38,6 +43,8 @@ public:
   /// \return the encrypted/decrypted string \param msg the message to be used
   std::string encrypt(std::string msg);
 
+
+  void makeItLookNice(std::string& msg);
 };
 
 #endif

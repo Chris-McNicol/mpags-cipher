@@ -1,0 +1,16 @@
+#include <iostream>
+#include <exception>
+
+class helpException: public std::exception
+{
+
+public:
+
+  helpException(const std::string m="Help Called");
+  ~helpException(void);
+  const char* what();
+
+private:
+  std::string msg;
+
+};

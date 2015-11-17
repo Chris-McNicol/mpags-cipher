@@ -15,6 +15,7 @@ add_library( MPAGSCipher STATIC
 	      PlayfairCipher.cpp
 	      VigenereCipher.hpp
 	      VigenereCipher.cpp
+	      CustomExceptions.cpp
  )
 
 target_include_directories(MPAGSCipher

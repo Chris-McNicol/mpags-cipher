@@ -20,7 +20,8 @@ enum class CipherMode {
 enum class CipherType {
 
   Caesar,
-  Playfair
+  Playfair,
+  Vigenere
 
     };
 
