@@ -16,13 +16,18 @@
 
 class PlayfairCipher{
 
-
+  /// \param key_ the keyword
   std::string key_;
+
+  /// \param mode_ the CipherMode, default Encrypt
   CipherMode mode_ = CipherMode::Encrypt;
 
   public:
 
+  /// \param str2intMap mapping of character to coordinates
   std::map<char, std::pair<int,int>> str2intMap;
+
+  /// \param int2strMap mapping of coordinates to character
   std::map<std::pair<int,int>,char> int2strMap;
 
   /**Create a new PlayfairCipher

@@ -78,25 +78,26 @@ int main(int argc, char* argv[]){
  
   blah = processCommandLine(argc,argv,Info);
   
-
+  if(Info.help) {    help_called();       return -1;}
+  if(Info.version) { version_called();    return -1;}
  
 
   if(blah) { std::cout << "Command Line entry satisfactory" << std::endl;}
-  if(Info.help) { help_called();    return -1;}
-  if(Info.version) {version_called();    return -1;}
-  if(Info.in_err) {input_error_called(); return -1;}
-  if(Info.out_err){output_error_called(); return -1;}
+  else{ std::cout << "Error Reading Command Line input" << std::endl; }
+  
+  
 
 
-  if(!(Info.in_err) && (Info.in_file_loc != "")){
+  if(Info.in_file_loc != ""){
          get_in_file(Info.in_file_loc, input, ok_read);}
     
-  if(Info.in_file_loc == ""){    
+  else{    
     std::cout << "Text to encrypt, [ENTER] to submit text   :  " << std::endl;
     get_command_text(input);
   }
   
-  if(Info.key == ""){std::cout << "No key selected, no encryption performed!" << std::endl;
+  if(Info.key == ""){
+    std::cout << "No key selected, no encryption performed!" << std::endl;
 
     return -1;}
     
@@ -134,7 +135,7 @@ int main(int argc, char* argv[]){
 
 
   //output the results
-  if(Info.out_select){put_out_file(Info.out_file_loc, encrypted, ok_write);}
+  if(Info.out_file_loc != ""){put_out_file(Info.out_file_loc, encrypted, ok_write);}
   else{std::cout << encrypted << std::endl;}
 
 

@@ -12,18 +12,20 @@
 #include "TransformChar.hpp"
 
 /**
- *VigenereCipher contains the all 26 possible Caesar Ciphers based on the key_ word
+ *VigenereCipher contains all possible 26 Caesar Ciphers and selects which to use based on the keyword stored in key_
  **/
 
 class VigenereCipher{
 
-
+  /// \param key_ the keyword
   std::string key_;
+
+  /// \param mode_ the encryption mode Encrypt/Decrypt, default Encrypt
   CipherMode mode_ = CipherMode::Encrypt;
 
   public:
 
-  
+  /// \param cipher_Holder_ a vector of all Caesar Ciphers
   std::vector<CaesarCipher> cipher_Holder_;
 
 
@@ -34,13 +36,14 @@ class VigenereCipher{
   
   VigenereCipher(std::string constructorkey, CipherMode mode);
 
-
+  /// creates and fills the vector of CaesarCiphers
   void createCiphers();
 
+  ///returns the CipherMode of the Vigenere Cipher
   CipherMode getMode();
   
 
-  ///A function which takes a decrypted message and removes the added 'X's and 'Z's
+  ///A function which isn't implemented but included to match other Cipher classes
   void makeItLookNice(std::string& msg);
 
   

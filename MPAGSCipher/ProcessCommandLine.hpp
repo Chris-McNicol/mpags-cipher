@@ -30,8 +30,6 @@ struct CommandLineInfo {
 
   bool help = false;
   bool version = false ;
-  bool in_err = false;
-  bool out_err = false;
   CipherMode mode = CipherMode::Encrypt;
   std::string key;
   bool cipher_err = false;

@@ -40,8 +40,7 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
 
     if(argument == "-cipher"){
 
-      if(arg_check == argc-1){Info.cipher_err = true;
-	return false;}
+      if(arg_check == argc-1){	return false;}
 
       else if (argument == "playfair" || argument == "Playfair"){
 	Info.ciphertype = CipherType::Playfair;}
@@ -50,8 +49,7 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
       else if (argument == "caesar" || argument == "Caesar"){
 	Info.ciphertype = CipherType::Caesar;}
 
-      else{Info.cipher_err = true;
-	return false;}
+      else{return false;}
     }
     
     //check for key, default is 0 which won't encrypt
@@ -59,7 +57,7 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
      
       if(arg_check != argc-1){
 	Info.key = argv[arg_check + 1];
-	//if( Info.key != 0){ Info.key_select = true;}
+	if( Info.key == ""){ return false;}
 	
       }
     }
