@@ -28,28 +28,30 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
     }
     //Check arguments for input file flag
     if(argument == "-i"){
-      if(arg_check == argc -1){return false;}
+      if(arg_check == argc -1){std::cout <<"i " << '\n'; return false;}
       else{ Info.in_file_loc = argv[arg_check +1];}
     }
 
     //Check arguments for output file flag
     if(argument == "-o"){
-      if(arg_check == argc-1){ return false;}
+      if(arg_check == argc-1){std::cout <<"o" << std::endl; return false;}
       else{Info.out_file_loc = argv[arg_check +1];}
     }   
 
     if(argument == "-cipher"){
+      std::string next_arg = argv[arg_check +1];
 
-      if(arg_check == argc-1){	return false;}
+      if(arg_check == argc-1){std::cout <<"argcheckc" <<std::endl;	return false;}
+      
 
-      else if (argument == "playfair" || argument == "Playfair"){
+      else if (next_arg == "playfair" || next_arg == "Playfair"){
 	Info.ciphertype = CipherType::Playfair;}
-      else if (argument == "vigenere" || argument == "Vigenere"){
+      else if (next_arg == "vigenere" || next_arg == "Vigenere"){
 	Info.ciphertype = CipherType::Vigenere; }
-      else if (argument == "caesar" || argument == "Caesar"){
+      else if (next_arg == "caesar" || next_arg == "Caesar"){
 	Info.ciphertype = CipherType::Caesar;}
 
-      else{return false;}
+      else{std::cout << "cipher else" << std::endl; return false;}
     }
     
     //check for key, default is 0 which won't encrypt
@@ -57,7 +59,7 @@ bool processCommandLine(const int argc,char* argv[], CommandLineInfo& Info){
      
       if(arg_check != argc-1){
 	Info.key = argv[arg_check + 1];
-	if( Info.key == ""){ return false;}
+	if( Info.key == ""){ std::cout <<"k" << std::endl; return false;}
 	
       }
     }

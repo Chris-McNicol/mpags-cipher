@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <algorithm>
+#include <iterator>
+#include <vector>
+#include <map>
 
 
 // Our program headers
@@ -14,11 +18,6 @@
 
 
 
-//template for reading textstream
-template <typename T, typename S>
-void readStream(T& input, S& msg_string){
-  input >> msg_string ;
-}
 
 //template for using Cipher
 
@@ -37,13 +36,17 @@ void get_in_file(std::string location, std::string& msg_string, bool& ok_read){
   std::ifstream in_file {location};
   if (in_file.good())
     { ok_read = true;
-      readStream(in_file, msg_string);  }
+      in_file >> msg_string;
   }
+}
 
 
 //function to request input text from user
 void get_command_text(std::string& msg_string){
-  readStream(std::cin, msg_string);}
+  char in_char{'x'};
+  while(std::cin >> in_char){
+    msg_string += in_char; }
+}
 
 
 //function to output string to file
@@ -55,65 +58,53 @@ void put_out_file(std::string location, std::string& msg, bool& ok_write){
 
 
 
-  
-
-
-
-
-
 //Here is the main function
 int main(int argc, char* argv[]){  
- 
-  
+   
   std::string msg{};
   std::string input{};
  
   bool ok_write{false};
   bool ok_read{false};
-
-  
+  bool blah{false};
   
   CommandLineInfo Info;
-  bool blah{false};
- 
+
+
+  //attempt to get Command Line options
   blah = processCommandLine(argc,argv,Info);
   
   if(Info.help) {    help_called();       return -1;}
   if(Info.version) { version_called();    return -1;}
  
-
   if(blah) { std::cout << "Command Line entry satisfactory" << std::endl;}
   else{ std::cout << "Error Reading Command Line input" << std::endl; }
   
   
 
-
+  //get text from Input file
   if(Info.in_file_loc != ""){
          get_in_file(Info.in_file_loc, input, ok_read);}
     
+
+  //get text from Command Line
   else{    
-    std::cout << "Text to encrypt, [ENTER] to submit text   :  " << std::endl;
+    std::cout << '\n' << "Text to encrypt, [ENTER] to submit text, [CTRL+D] to start encryption   :  " << std::endl;
     get_command_text(input);
   }
   
+  //if no key, end program with error message
   if(Info.key == ""){
     std::cout << "No key selected, no encryption performed!" << std::endl;
-
     return -1;}
     
 
-  char in_char{'x'};  
-  for(size_t pos=0 ; pos < input.length(); pos++){
-    
-    /* Check if character is an alphabetic 
-       letter, force it to be uppercase */
 
-    in_char = input.at(pos);
-    msg += transformChar(in_char); 
-       }
+
+  //transform characters, remove punctuation and force uppercase
+  msg = transformChar(input);
 
   
-
 
   //run the Cipher
   std::string encrypted{""};
@@ -132,12 +123,12 @@ int main(int argc, char* argv[]){
 
 
 
-
-
   //output the results
   if(Info.out_file_loc != ""){put_out_file(Info.out_file_loc, encrypted, ok_write);}
-  else{std::cout << encrypted << std::endl;}
 
+  else{
+    std::cout << '\n' << "Result of Cipher:   " << '\n';    
+    std::cout << encrypted << '\n' << std::endl;}
 
   if(ok_write && ok_read){ std::cout << "everything went well" << std::endl;}
 }

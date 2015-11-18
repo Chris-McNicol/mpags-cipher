@@ -10,4 +10,6 @@
  **/
 std::string transformChar(char c);
 
+std::string transformChar(std::string str);
+
 #endif // MPAGSCIPHER_TRANSFORMCHAR_HPP

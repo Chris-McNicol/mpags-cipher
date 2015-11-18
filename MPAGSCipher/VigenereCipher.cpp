@@ -59,8 +59,7 @@ std::string VigenereCipher::encrypt(std::string msg){
 
   keyphrase.erase(msg.length(), need_to_erase);
 
-  std::cout << "keyphrase: " << keyphrase << std::endl;
-
+  
   std::string encrypted{""};
 
 

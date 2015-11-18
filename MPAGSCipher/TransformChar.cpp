@@ -58,3 +58,17 @@ std::string transformChar(char input){
     }
     return output;
 }
+
+
+
+std::string transformChar(std::string str){
+
+  char in_char{'x'};
+  std::string toReturn{""};
+  for(size_t pos = 0; pos < str.length(); ++pos){
+
+    in_char = str.at(pos);
+    toReturn += transformChar(in_char);
+  }
+  return toReturn;
+}
