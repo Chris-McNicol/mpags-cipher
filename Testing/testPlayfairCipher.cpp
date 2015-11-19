@@ -2,44 +2,35 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "TransformChar.hpp"
+#include "PlayfairCipher.hpp"
 
-TEST_CASE("Characters are uppercase","[alphanumeric]"){
-  REQUIRE(( transformChar('a') == "A" ));
-  REQUIRE(( transformChar('B') == "B" ));
+TEST_CASE("Correctly creates mapping from keyword","[mapping]"){
+  REQUIRE(false);
 }
 
-TEST_CASE("Digits are transliterated","[alphanumeric]"){
-  REQUIRE(( transformChar('0') == "ZERO" ));
-  REQUIRE(( transformChar('1') == "ONE" ));
-  REQUIRE(( transformChar('2') == "TWO" ));
-  REQUIRE(( transformChar('3') == "THREE" ));
-  REQUIRE(( transformChar('4') == "FOUR" ));
-  REQUIRE(( transformChar('5') == "FIVE" ));
-  REQUIRE(( transformChar('6') == "SIX" ));
-  REQUIRE(( transformChar('7') == "SEVEN" ));
-  REQUIRE(( transformChar('8') == "EIGHT" ));
-  REQUIRE(( transformChar('9') == "NINE" ));
+TEST_CASE("Indices correctly wrapped","[wrapping]"){
+  REQUIRE(playWrap(-1) == 3);
+  REQUIRE(playWrap(5) == 0);
 }
 
-TEST_CASE("Special characters are removed", "[punctuation]"){
-  std::vector<char> punctuation;
+TEST_CASE("makeItLookNice works", "[cosmetic]"){
+
+  std::string msg1 = "BLOOBARXRAYXMENLXLCOOLJZ";
+  std::string msg2 = "ZXZTOPISAGOXODBAND";
+  std::string msg3 = "ENDREMOVEZ";
+  std::string msg4 = "MIDXDLEREMOVED";
+  std::string msg5 = "LETXTERXISLEFTALONEZ";
+
+  REQUIRE(makeItLookNice(msg1) == "BLOOBARXRAYXMENLLCOOLJ");
+  REQUIRE(makeItLookNice(msg2) == "ZZTOPISAGOODBAND");
+  REQUIRE(makeItLookNice(msg3) == "ENDREMOVE");
+  REQUIRE(makeItLookNice(msg4) == "MIDDLEREMOVED");
+  REQUIRE(makeItLookNice(msg5) == "LETTERXISLEFTALONE");
+
   
-  for(int i = 0; i < 48; i++){
-    punctuation.push_back(char(i));
-  }
-  for(int j=58; j < 65; j++){
-    punctuation.push_back(char(j));
-  }
-  for(int k=94; k < 97; k++){
-    punctuation.push_back(char(k));
-  }
-  for(int l=123; l < 128; l++){
-    punctuation.push_back(char(l));
-  }
-  
-  for(char c : punctuation) {
-    REQUIRE(( transformChar(c) == ""));
-  }
+}
+
+TEST_CASE("Encryption /decryption works", "[encryption]"){
+  REQUIRE(false);
 
 }
