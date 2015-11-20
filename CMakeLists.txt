@@ -23,13 +23,15 @@ enable_testing()
 add_subdirectory(Testing)
 
 #Declare the build of the mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/CustomExceptions.cpp MPAGSCipher/VigenereCipher.hpp MPAGSCipher/VigenereCipher.cpp MPAGSCipher/PlayfairCipher.hpp MPAGSCipher/PlayfairCipher.cpp MPAGSCipher/CaesarCipher.cpp MPAGSCipher/CaesarCipher.hpp MPAGSCipher/TransformChar.hpp MPAGSCipher/ProcessCommandLine.cpp MPAGSCipher/ProcessCommandLine.hpp MPAGSCipher/CommandLineHelpers.hpp MPAGSCipher/TransformChar.cpp MPAGSCipher/CommandLineHelpers.cpp)
+add_executable(mpags-cipher mpags-cipher.cpp)
+
+target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)
 
 target_include_directories(mpags-cipher
   PRIVATE MPAGSCipher
   )
 
-target_compile_features(mpags-cipher PRIVATE cxx_auto_type cxx_range_for cxx_uniform_initialization )
+target_compile_features(mpags-cipher PRIVATE cxx_auto_type cxx_range_for cxx_uniform_initialization cxx_binary_literals )
 
 # - Install mpags-cipher using UNIX/GNU directory structure
 include(GNUInstallDirs)

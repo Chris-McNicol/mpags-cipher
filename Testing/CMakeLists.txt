@@ -37,3 +37,8 @@ add_executable(testPlayfairCipher testPlayfairCipher.cpp)
 target_link_libraries(testPlayfairCipher MPAGSCipher Catch)
 add_test(NAME test-PlayfairCipher COMMAND testPlayfairCipher)
 
+#Test Encryption
+add_executable(testEncryption testEncryption.cpp)
+target_link_libraries(testEncryption MPAGSCipher Catch)
+add_test(NAME test-Encryption COMMAND testEncryption)
+

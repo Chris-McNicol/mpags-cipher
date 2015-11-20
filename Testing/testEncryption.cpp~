@@ -1,0 +1,25 @@
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+
+
+#include "Cipher.hpp"
+#include "CaesarCipher.hpp"
+#include "PlayfairCipher.hpp"
+#include "VigenereCipher.hpp"
+#include "HelpfulEnums.hpp"
+#include "CipherFactory.hpp"
+
+#include <vector>
+
+
+std::vector<std::unique_ptr<Cipher>> CipherList;
+
+auto playcipher = cipherFactory(CipherType::Playfair, "PlayfairKeyword");
+auto vigcipher = cipherFactory(CipherType::Vigenere, "VigenereKeyword");
+auto caescipher = cipherFactory(CipherType::Caesar, "CaesarKeyword");
+
+CipherList.push_back(playcipher)
+
+
+
+

@@ -14,21 +14,23 @@
 #include "CaesarCipher.hpp"
 #include "PlayfairCipher.hpp"
 #include "VigenereCipher.hpp"
+#include "HelpfulEnums.hpp"
+#include "CipherFactory.hpp"
 
 
 
 
 
 //template for using Cipher
-
+/*
 template <typename C, typename S>
-std::string applyCipher(C& Cipher, S& input_string){
+std::string getIt(C& Cipher, S& input_string ){
   std::string encrypted = Cipher.encrypt(input_string);
   Cipher.makeItLookNice(encrypted);
 
   return encrypted;
 }
- 
+*/
 
 //function to get input text from file
 void get_in_file(std::string location, std::string& msg_string, bool& ok_read){
@@ -104,24 +106,36 @@ int main(int argc, char* argv[]){
   //transform characters, remove punctuation and force uppercase
   msg = transformChar(input);
 
-  
-
-  //run the Cipher
   std::string encrypted{""};
+  
+  //run the Cipher
+   
+  /*
   if(Info.ciphertype == CipherType::Vigenere){
-    VigenereCipher my_cipher = VigenereCipher{Info.key, Info.mode};
-    encrypted = applyCipher(my_cipher,msg); }
+    VigenereCipher my_cipher = VigenereCipher{Info.key};
+    encrypted = getIt(my_cipher,msg); }
 
  else if(Info.ciphertype == CipherType::Playfair){
-   PlayfairCipher my_cipher = PlayfairCipher(Info.key, Info.mode);
-   encrypted = applyCipher(my_cipher,msg);
+   PlayfairCipher my_cipher = PlayfairCipher(Info.key);
+   encrypted = getIt(my_cipher,msg);
  }
 
  else if(Info.ciphertype == CipherType::Caesar){
-   CaesarCipher my_cipher = CaesarCipher(Info.key, Info.mode); 
-   encrypted = applyCipher(my_cipher, msg); }
+   CaesarCipher my_cipher = CaesarCipher(Info.key); 
+   encrypted = getIt(my_cipher, msg); }
+
+  */
+
+  auto my_cipher = cipherFactory(Info.ciphertype, Info.key);
+
+  if(Info.mode == CipherMode::Decrypt){
+    encrypted = my_cipher->decrypt(msg);}
+  
+  else{encrypted = my_cipher->encrypt(msg);}
 
 
+  // Uncomment to make Playfair output look nice (remove X and Z)
+  //  my_cipher->makeItLookNice(encrypted);
 
   //output the results
   if(Info.out_file_loc != ""){put_out_file(Info.out_file_loc, encrypted, ok_write);}

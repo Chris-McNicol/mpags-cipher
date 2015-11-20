@@ -1,0 +1,6 @@
+#ifndef CIPHER_FACTORY_HPP
+#define CIPHER_FACTORY_HPP
+
+std::unique_ptr<Cipher> cipherFactory(const CipherType type, const std::string key);
+
+#endif

@@ -16,6 +16,10 @@ add_library( MPAGSCipher STATIC
 	      VigenereCipher.hpp
 	      VigenereCipher.cpp
 	      CustomExceptions.cpp
+	      Cipher.hpp
+	      CipherFactory.hpp
+	      CipherFactory.cpp
+	      HelpfulEnums.hpp
  )
 
 target_include_directories(MPAGSCipher
@@ -23,5 +27,5 @@ target_include_directories(MPAGSCipher
 	)
 
 target_compile_features(MPAGSCipher
-	PUBLIC cxx_auto_type cxx_range_for cxx_uniform_initialization
+	PUBLIC cxx_auto_type cxx_range_for cxx_uniform_initialization cxx_binary_literals
 	)

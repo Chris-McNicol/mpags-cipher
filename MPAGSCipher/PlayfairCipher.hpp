@@ -8,20 +8,19 @@
 #include <map>
 
 #include "ProcessCommandLine.hpp"
+#include "Cipher.hpp"
 
 /**
  *PlayfairCaesarCipher contains the a mapping of characters to coordinates and vice-versa, the key of the cipher
  * and a flag for decryption
  **/
 
-class PlayfairCipher{
+class PlayfairCipher : public Cipher{
 
   /// \param key_ the keyword
   std::string key_;
 
-  /// \param mode_ the CipherMode, default Encrypt
-  CipherMode mode_ = CipherMode::Encrypt;
-
+  
   public:
 
   /// \param str2intMap mapping of character to coordinates
@@ -35,21 +34,23 @@ class PlayfairCipher{
    * \param constructorkey the key to the cipher. \param mode whether to 'Encrypt' or 'Decrypt'
    **/
   
-  PlayfairCipher(std::string constructorkey, CipherMode mode);
+  PlayfairCipher(std::string constructorkey);
 
 
   /// Creates the mapping from the keyword \param keyToSet the keyword
-  void setKey(std::string keyToSet);
+  void setKey(const std::string keyToSet);
 
   ///A helper function to ensure coordinates are in the 5x5 square. \param index the index to be wrapped
-  int playWrap(int index);
+  int playWrap(int index) const ;
   
   ///A function which takes a decrypted message and removes the added 'X's and 'Z's
-  void makeItLookNice(std::string& msg);
+  virtual void makeItLookNice(std::string& msg) const override;
 
+  std::string applyCipher(const std::string& msg, CipherMode mode) const;
   
   /// \return the encrypted/decrypted string \param msg the message to be used
-  std::string encrypt(std::string msg);
+  std::string encrypt(const std::string& msg) const override;
+  std::string decrypt(const std::string& msg) const override;
 
 };
 

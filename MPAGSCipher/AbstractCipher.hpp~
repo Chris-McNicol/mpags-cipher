@@ -1,0 +1,23 @@
+#ifndef ABSTRACT_CIPHER_HPP
+#define ABSTRACT_CIPHER_HPP
+
+class AbstractCipher {
+
+public:
+
+  AbstractCipher() = default;
+  AbstractCipher(const AbstractCipher&& rhs) = default;
+  AbstractCipher(AbstractCipher&& rhs) = default;
+  AbstractCipher& operator=(const Abstract&& rhs) = default;
+  virtual ~AbstractCipher() = default;
+
+  
+  virtual void makeItLookNice(std::string& msg);
+  virtual std::string encrypt(std::string msg);
+
+
+
+
+};
+
+#endif

@@ -1,0 +1,16 @@
+
+
+std::unique_ptr<Cipher> cipherFactory(const CipherType type, const std::string key){
+
+  switch(type) {
+
+  case CipherType::Caesar :
+    return std::make_unique<Caesar>(key);
+
+  case CipherType::Playfair :
+    return std::make_unique<Playfair>(key);
+
+  case CipherType::Vigenere :
+    return std::make_unique<Vigenere>(key);
+  }
+}

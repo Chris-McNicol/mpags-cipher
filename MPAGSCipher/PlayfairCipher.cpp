@@ -7,11 +7,10 @@
 #include <iostream>
 
 #include "PlayfairCipher.hpp"
+#include "TransformChar.hpp"
 
 
-PlayfairCipher::PlayfairCipher(std::string thekey, CipherMode decrypt_mode)
-  :key_{thekey},mode_{decrypt_mode}
-   {
+PlayfairCipher::PlayfairCipher(std::string thekey){
      setKey(thekey);
        }
    
@@ -99,15 +98,25 @@ auto close_encounters = [&] (char f){
  
 }
 
-int PlayfairCipher::playWrap(int index){
+
+//Wrap Function
+int PlayfairCipher::playWrap(int index) const{
 
   if ( index > 4){index -= 5;}
   if ( index < 0){index += 5;}
   return index;}
 
-  
-std::string PlayfairCipher::encrypt(std::string msg){
 
+
+
+
+
+
+//Apply Cipher Function  
+std::string PlayfairCipher::applyCipher(const std::string& msg_ref, CipherMode mode) const{
+
+  std::string msg{""};
+  std::string input_msg = msg_ref;
   std::string digraph{""};
   std::string returntext;
   std::string encrypteddigraph{""};
@@ -120,23 +129,26 @@ std::string PlayfairCipher::encrypt(std::string msg){
   
 
   int shifter{};
-  if (mode_ == CipherMode::Encrypt){ shifter = 1; }
-  if (mode_ ==CipherMode::Decrypt){ shifter = -1; }
-  
-
-  
+  if (mode == CipherMode::Encrypt){ shifter = 1; }
+  if (mode ==CipherMode::Decrypt){ shifter = -1; }
+   
 
   //Make sure input is valid
   //Upper case, only chars and J-> I
 
+  msg = transformChar(input_msg);
 
+  auto blahfunc = [] (char b){
+    if( b == 'J'){ return 'I';}
+    else {return b;}
+  };
 
-
-
+  std::transform(msg.begin(), msg.end(), msg.begin(), blahfunc);
+  
 
   //Find repeated chars and add an X
 
-  if(mode_ == CipherMode::Encrypt){
+  if(mode == CipherMode::Encrypt){
   
   for(size_t foo{0} ; foo < msg.length() - 1; ++foo){
 
@@ -145,6 +157,7 @@ std::string PlayfairCipher::encrypt(std::string msg){
     }
   }
 
+  
   //If the size is odd, add a trailing Z
 
   if((msg.length())%2 != 0){ msg+="Z";}
@@ -160,7 +173,6 @@ std::string PlayfairCipher::encrypt(std::string msg){
       digraph += msg[brum+1];
 
       
-
       //Find the coords for the digraph
       
       auto coord1iter = str2intMap.find(digraph[0]);
@@ -168,19 +180,20 @@ std::string PlayfairCipher::encrypt(std::string msg){
 
       coord1 = (*coord1iter).second;
       coord2 = (*coord2iter).second;
- 
+
+      
      
   //For each Digraph, decide how to encrypt
 
+      
       //same row
       if( coord1.first == coord2.first){
-	
-
 	
 	encryptcoord1 = std::make_pair(coord1.first, playWrap(coord1.second +shifter));
 	encryptcoord2 = std::make_pair(coord2.first, playWrap(coord2.second +shifter));
       }
 
+      
       //same column
       else if( coord1.second == coord2.second){
 	
@@ -188,6 +201,7 @@ std::string PlayfairCipher::encrypt(std::string msg){
 	encryptcoord2 = std::make_pair(playWrap(coord2.first + shifter), coord2.second);
       }
 
+      
       //else rectangle -> swap column coords
       else{
 	
@@ -203,13 +217,28 @@ std::string PlayfairCipher::encrypt(std::string msg){
   //return the text
   
   return returntext;
-
  
    }
+
+
+
+
+
+
+//Encrypt Function
+std::string PlayfairCipher::encrypt(const std::string& msg) const {
+
+  return this->applyCipher(msg, CipherMode::Encrypt);}
+
+//Decrypt Function
+std::string PlayfairCipher::decrypt(const std::string& msg) const {
+
+  return this->applyCipher(msg, CipherMode::Decrypt);}
+
   
 
-
-void PlayfairCipher::makeItLookNice(std::string& msg){
+//Make it Look Nice
+void PlayfairCipher::makeItLookNice(std::string& msg) const{
 
   if( msg[msg.length() - 1] == 'Z'){
 

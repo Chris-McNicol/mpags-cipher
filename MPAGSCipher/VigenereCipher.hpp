@@ -15,41 +15,41 @@
  *VigenereCipher contains all possible 26 Caesar Ciphers and selects which to use based on the keyword stored in key_
  **/
 
-class VigenereCipher{
+class VigenereCipher : public Cipher{
 
   /// \param key_ the keyword
   std::string key_;
-
-  /// \param mode_ the encryption mode Encrypt/Decrypt, default Encrypt
-  CipherMode mode_ = CipherMode::Encrypt;
 
   public:
 
   /// \param cipher_Holder_ a vector of all Caesar Ciphers
   std::vector<CaesarCipher> cipher_Holder_;
 
+  
+    std::map<char, CaesarCipher>  char2ciph;
+  
 
   /**Create a new Vigenere
    *
    * \param constructorkey the key to the cipher. \param mode whether to 'Encrypt' or 'Decrypt'
    **/
   
-  VigenereCipher(std::string constructorkey, CipherMode mode);
+  VigenereCipher(std::string constructorkey);
 
   /// creates and fills the vector of CaesarCiphers
   void createCiphers();
-
-  ///returns the CipherMode of the Vigenere Cipher
-  CipherMode getMode();
   
 
   ///A function which isn't implemented but included to match other Cipher classes
-  void makeItLookNice(std::string& msg);
+ virtual  void makeItLookNice(std::string& msg) const override ;
+
+  
+  std::string applyCipher(const std::string& msg, CipherMode mode) const;
 
   
   /// \return the encrypted/decrypted string \param msg the message to be used
-  std::string encrypt(std::string msg);
-
+  std::string encrypt(const std::string& msg) const override;
+  std::string decrypt(const std::string& msg) const override;
 };
 
 #endif

@@ -3,10 +3,13 @@
 #include "catch.hpp"
 
 #include "CaesarCipher.hpp"
+#include "ProcessCommandLine.hpp"
+
+CaesarCipher my_cipher = CaesarCipher("5");
 
 TEST_CASE("Indices are properly wrapped","[wrapping]"){
-  REQUIRE((wrapIt(27) == 1));
-  REQUIRE(( wrapIt(-3) == 23 ));
+  REQUIRE((my_cipher.wrapIt(27) == 1));
+  REQUIRE(( my_cipher.wrapIt(-3) == 23 ));
 }
 
 TEST_CASE("Characters are correctly shifted","[shift]"){
