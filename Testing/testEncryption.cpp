@@ -26,8 +26,8 @@ CipherList.push_back( cipherFactory(CipherType::Vigenere, "VigenereKey"));
 
 
 good.push_back("VNZPBEERPG");
-good.push_back("KPCDVDKBMN");
-good.push_back("XWXVRGKPIILXZETGIU");
+good.push_back("KPCDVDVEIHZF");
+good.push_back("EJTHCWJJNY");
 
   for(size_t pos = 0; pos < CipherList.size(); pos++){
     blah = CipherList[pos]->encrypt(tester);

@@ -19,6 +19,8 @@ endif()
 
 add_subdirectory(MPAGSCipher)
 
+add_subdirectory(Documentation)
+
 enable_testing()
 add_subdirectory(Testing)
 
